@@ -12,17 +12,14 @@ typedef struct print
 {
 	char *j;
 	int (*k)(va_list);
-} print_t;
+} print_a;
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int (*get_print_func(const char *format))(va_list);
-int print_c(va_list c);
-int print_s(va_list s);
-int print_d(va_list d);
-int print_i(va_list i);
-
-
-int _putchar(char c);
+int aux_func(const char *format, va_list args, print_a *a);
+int print_c(va_list arg);
+int print_s(va_list arg);
+int print_d(va_list arg);
+int print_i(va_list arg);
 
 #endif /* MAIN_H */
