@@ -8,6 +8,7 @@ int _printf(const char *format, ...)
 	print_a a[] = {
 		{"c", print_c},
 		{"s", print_s},
+		{"%", print_pct},
 		{"d", print_d},
 		{"i", print_i},
 		{NULL, NULL}
