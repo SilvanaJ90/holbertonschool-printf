@@ -73,5 +73,5 @@ int print_i(va_list arg)
 int print_pct(va_list arg)
 {
 	(void)arg;
-	return (write(1, "%", 1));
+	return (write(1, "%%", 1));
 }
