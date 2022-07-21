@@ -24,6 +24,18 @@ int print_s(va_list arg)
 	return (i);
 }
 
+int print_d(va_list arg)
+{
+	_putchar(va_arg(arg, int));
+	return (1);
+}
+
+int print_i(va_list arg)
+{
+	_putchar(va_arg(arg, int));
+	return (1);
+}
+
 
 int print_pct(va_list arg)
 {
