@@ -1,6 +1,10 @@
 #include "main.h"
 /**
+ * _printf - check code
+ * @format: pointer
+ * return_ lenght
  */
+
 int _printf(const char *format, ...)
 {
 	va_list arg;

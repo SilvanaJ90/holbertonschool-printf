@@ -1,7 +1,12 @@
 #include "main.h"
 #include <unistd.h>
 /**
+ * aux_func - check code
+ * @format: pointer
+ * @va_list arg: va list
+ * print_a: typedef
  */
+
 int aux_func(const char *format, va_list arg, print_a *a)
 {
 	int v = 0, m, size = 0, test = 0;
