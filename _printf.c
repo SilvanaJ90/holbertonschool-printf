@@ -2,7 +2,7 @@
 /**
  * _printf - check code
  * @format: pointer
- * return: lenght
+ * Return: lenght
  */
 
 int _printf(const char *format, ...)
