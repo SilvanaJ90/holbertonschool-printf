@@ -3,8 +3,10 @@
 /**
  * aux_func - check code
  * @format: pointer
- * @va_list arg: va list
+ * @arg: va list
  * print_a: typedef
+ * @a: pointer
+ * Return: size
  */
 
 int aux_func(const char *format, va_list arg, print_a *a)
