@@ -1,0 +1,210 @@
+_PRINTF
+
+NAME
+    _printf
+
+SYNOPSIS
+
+    #include <stdio.h>
+
+    int _putchar(char c);
+    int _printf(const char *format, ...);
+    int aux_func(const char *format, va_list args, print_a *a);
+
+    #include <stdarg.h>
+
+    int print_c(va_list arg);
+    int print_s(va_list arg);
+    int print_pct(va_list arg);
+    int print_d(va_list arg);
+    int print_i(va_list arg);
+
+DESCRIPTION
+
+The function _printf()
+function that produces output according to a format.
+as long as the format is null, it prints a string->buffer and returns
+string->count, as long as the format is a % expansion character the
+function continues, it handles the format with a course to traverse the handle,
+store string->buffer or transformed string->count increment string->count with
+the handled format. It increments the format iterator and continues. If there
+is no expansion character % the format character is stored in string->buffer
+increments string->count by 1
+Returns: the number of characters printed (excluding the null
+byte used to end output to strings)
+write output to stdout, the standard output stream
+format is a character string. The format string is
+composed of zero or more directives.
+
+Handles the following conversion specifiers:
+
+    c   The char, short or int argument is printed as an ACSCII character if
+        the character is in printable ASCII format. If the character is not
+        printable, it will be printed using the corresponding escape sequence
+
+    s   The argument must be a char array or string. The bytes of the array or
+        string are read up to a final null character or to the end of the data,
+        and are interpreted and printed as ASCII characters. If the precision
+        is not specified, it is set to infinite, so all characters up to the
+        first null character are printed. If, on the other hand, precision
+        is specified, only the part of the character array that will be
+        displayed in the corresponding number of columns on the screen
+        will be printed. If an argument of type char * is formatted, it should
+        be converted to a string, string, or prefixed with a D language stringof
+        flag to indicate that DTrace should keep track of the bytes in the
+        string and format them.
+
+    d   The argument char, short, int, long or long long long is printed as a
+        decimal integer (base 10). If the argument is signed, it is printed
+        as a signed value. If, on the other hand, it is unsigned, it will be
+        printed as an unsigned value. This conversion has the same meaning as i.
+
+    i   The argument char, short, int, long or long long long is printed as
+        a decimal integer (base 10). If the argument is signed, it is printed
+        as a signed value. If, on the other hand, it is unsigned, it will be
+        printed as an unsigned value. This conversion has the same meaning as d.
+
+    u   The argument char, short, int, long or long long long is printed in
+        unsigned decimal (base 10) integer form. Signed or unsigned arguments
+        can be used with this conversion, although the result is always given
+        an unsigned format.
+
+    o   The argument char, short, int, long or long long long is printed as an
+        unsigned octal (base 8) integer. Signed or unsigned arguments can be
+        used with this conversion. Specifying the # flag will increase the
+        precision of the result, if necessary, to make the first digit of the
+        result zero.
+
+x, X    The argument char, short, int, long or long long long is printed as
+        an unsigned hexadecimal (base 16) integer. Signed or unsigned arguments
+        can be used with this conversion. If the x format of the conversion is
+        used, the letters abcdef are used. If the X format of the conversion is
+        used, the letters ABCDEF are used. If the # flag is specified, 0x
+        (for %x) or 0X (for %X) will be included in front of a non-zero result.
+
+    +   The signed conversion result always begins with a sign (+ or -). If
+        this indicator is not specified, the conversion starts with a sign only
+        when converting a negative value.
+
+space   If the first character of a signed conversion is not a sign or if the
+        signed conversion does not result in any characters, a space is included
+        before the result. If both the space and + indicators appear, the space
+        indicator is omitted.
+
+    #   The value is converted to an alternative format if this is defined for
+        the selected conversion. The alternative formats for conversions are
+        described together with the corresponding conversion.
+
+    %   Allows printing a literal % character. No arguments are converted.
+        The full conversion specification must be %%
+
+EXAMPLE
+
+   Result of the _printf function with the use of the previously seen specifiers
+
+    Let's try to printf a simple sentence.
+    Let's try to printf a simple sentence.
+    Length:[39, 39]
+    Length:[39, 39]
+    Negative:[-762534]
+    Negative:[-762534]
+    Unsigned:[2147484671]
+    Unsigned:[2147484671]
+    Unsigned octal:[20000001777]
+    Unsigned octal:[20000001777]
+    Unsigned hexadecimal:[800003ff, 800003FF]
+    Unsigned hexadecimal:[800003ff, 800003FF]
+    Character:[H]
+    Character:[H]
+    String:[I am a string !]
+    String:[I am a string !]
+    Address:[0x7ffe637541f0]
+    Address:[0x7ffe637541f0]
+    Percent:[%]
+    Percent:[%]
+    Len:[12]
+    Len:[12]
+    Unknown:[%r]
+    Unknown:[%r]
+
+  Code used for this function
+
+int _printf(const char *format, ...)
+{
+	va_list arg;
+	int lenght = 0;
+	print_a a[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"%", print_pct},
+		{"d", print_d},
+		{"i", print_i},
+		{NULL, NULL}
+	};
+	va_start(arg, format);
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	{
+		return (-1);
+	}
+	lenght = aux_func(format, arg, a);
+	va_end(arg);
+	return (lenght);
+}
+
+int aux_func(const char *format, va_list arg, print_a *a)
+{
+	int v = 0, m, size = 0, test = 0;
+
+	while (format && format[v])
+	{
+		if (format[v] == '%')
+		{
+			m = 0;
+			while (a[m].j != NULL)
+			{
+				if (format[v + 1] == '%')
+				{
+					write(1, &format[v], 1);
+					size++;
+					v++;
+					test = 1;
+					break;
+				}
+				else if (a[m].j[0] == format[v + 1])
+				{
+					size += a[m].k(arg);
+					v++;
+					test = 1;
+					break;
+				}
+				m++;
+			}
+			if (test == 0)
+			{
+				write(1, &format[v], 1);
+				size++;
+			}
+		}
+		else
+		{
+			write(1, &format[v], 1);
+			size++;
+		}
+		v++;
+	}
+	return (size);
+}
+
+
+
+
+COMPILATION
+
+    gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c
+
+
+AUTHOR FILE
+
+       JUAN ANDRES GARCIA, SILVANA JARAMILLO
+       C-18
+       HOLBERTON SCHOOL
