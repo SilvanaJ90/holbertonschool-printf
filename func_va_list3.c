@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 /**
  */
 static int hex_print(char c)
@@ -99,4 +100,24 @@ int print_p(va_list p)
 		}
 	}
 	return (count);
+}
+/**
+ */
+int print_r(va_list arg)
+{
+	char *vp, res;
+	int i = 0, len = 0;
+	
+	vp= va_arg(arg, char *);
+	while (vp[i] != '\0')
+	{
+		len++;
+		i++;
+	}
+	for (i = len - 1; i >= 0; i--)
+	{
+		res = vp[i];
+		write(1, &res, 1);
+	}
+	return (len);
 }
