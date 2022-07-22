@@ -12,28 +12,28 @@
 
 int print_b(va_list arg)
 {
-	unsigned int n, m, i, sum;
-	unsigned int a[32];
-	int count;
+	unsigned int n, buff[1024];
+	int i, len = 0;
+	char p;
 
-	n = va_arg(arg, unsigned int);
-	m = 2147483648; /* (2 ^ 31) */
-	a[0] = n / m;
-	for (i = 1; i < 32; i++)
+	n = va_arg(arg, int);
+	if (n < 1)
 	{
-		m /= 2;
-		a[i] = (n / m) % 2;
+		write(1, "0", 1);
+		return (1);
 	}
-	for (i = 0, sum = 0, count = 0; i < 32; i++)
+	while (n > 0)
 	{
-		sum += a[i];
-		if (sum || i == 31)
-		{
-			_putchar('0' + a[i]);
-			count++;
-		}
+		buff[len] = n % 2;
+		n /= 2;
+		len++;
 	}
-	return (count);
+	for (i = len - 1; i >= 0; i--)
+	{
+		p = buff[i] + '0';
+		write(1, &p, 1);
+	}
+	return (len);
 }
 
 /**
@@ -125,35 +125,34 @@ int print_o(va_list arg)
 
 int print_x(va_list arg)
 {
-	int *a;
-	int j, count;
-	unsigned int n = va_arg(arg, unsigned int);
-	unsigned int tem = n;
+	unsigned int n, buff[1024];
+	int i = 0, len = 0;
+	char p;
 
-	count = 0;
-
-	while (n / 16 != 0)
+	n = va_arg(arg, int);
+	if (n < 1)
 	{
+		write(1, "0", 1);
+		return (1);
+	}
+	while (n > 0)
+	{
+		buff[len] = n % 16;
 		n /= 16;
-		count++;
+		if (buff[len] > 9)
+			buff[i] = buff[len] + 39;
+		else
+			buff[i] = buff[len];
+		i++;
+		len++;
 	}
-	count++;
-	a = malloc(count * sizeof(int));
-	for (j = 0; j < count; j++)
+	for (i = len - 1; i >= 0; i--)
 	{
-		a[j] = tem % 16;
-		tem /= 16;
+		p = buff[i] + '0';
+		write(1, &p, 1);
 	}
-	for (j = count - 1; j >= 0; j--)
-	{
-		if (a[j] > 9)
-			a[j] = a[j] + 7;
-		_putchar(a[j] + '0');
-	}
-	free(a);
-	return (count);
+	return (len);
 }
-
 
 /**
  * print_X - check code
