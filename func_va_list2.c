@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 /**
- * print_u - check code
+ * print_b - check code
  * @arg: value
  * Return: count
  */
@@ -110,7 +110,7 @@ int print_o(va_list arg)
 	}
 	for (j = count - 1; j >= 0; j--)
 	{
-			_putchar(a[j] + '0');
+		_putchar(a[j] + '0');
 	}
 	free(a);
 	return (count);
@@ -156,7 +156,7 @@ int print_x(va_list arg)
 
 
 /**
- * print_x - check code
+ * print_X - check code
  * @arg: value
  * Return: count
  */
