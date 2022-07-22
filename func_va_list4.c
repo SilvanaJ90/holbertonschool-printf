@@ -1,11 +1,13 @@
 #include "main.h"
+#include <unistd.h>
+#include <stdlib.h>
 /**
  */
 int print_R(va_list arg)
 {
 	int i, j, len = 0;
-	char alpha[] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"}
-	char rot13[] = {"NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"}
+	char alpha[] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"};
+	char rot[] = {"NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"};
 	char *p, *m;
 
 	p = va_arg(arg, char *);
@@ -24,7 +26,7 @@ int print_R(va_list arg)
 		{
 			if (m[i] == alpha[j])
 			{
-				m[i] = ch[j];
+				m[i] = rot[j];
 				break;
 			}
 		}
