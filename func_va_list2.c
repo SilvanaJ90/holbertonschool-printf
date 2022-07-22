@@ -125,35 +125,34 @@ int print_o(va_list arg)
 
 int print_x(va_list arg)
 {
-	int *a;
-	int j, count;
-	unsigned int n = va_arg(arg, unsigned int);
-	unsigned int tem = n;
+	unsigned int n, buff[1024];
+	int i = 0, len = 0;
+	char p;
 
-	count = 0;
-
-	while (n / 16 != 0)
+	n = va_arg(arg, int);
+	if (n < 1)
 	{
+		write(1, "0", 1);
+		return (1);
+	}
+	while (n > 0)
+	{
+		buff[len] = n % 16;
 		n /= 16;
-		count++;
+		if (buff[len] > 9)
+			buff[i] = buff[len] + 39;
+		else
+			buff[i] = buff[len];
+		i++;
+		len++;
 	}
-	count++;
-	a = malloc(count * sizeof(int));
-	for (j = 0; j < count; j++)
+	for (i = len - 1; i >= 0; i--)
 	{
-		a[j] = tem % 16;
-		tem /= 16;
+		p = buff[i] + '0';
+		write(1, &p, 1);
 	}
-	for (j = count - 1; j >= 0; j--)
-	{
-		if (a[j] > 9)
-			a[j] = a[j] + 7;
-		_putchar(a[j] + '0');
-	}
-	free(a);
-	return (count);
+	return (len);
 }
-
 
 /**
  * print_X - check code
