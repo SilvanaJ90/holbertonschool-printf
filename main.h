@@ -27,6 +27,5 @@ int print_u(va_list arg);
 int print_o(va_list arg);
 int print_x(va_list arg);
 int print_X(va_list arg);
-int write(char c);
 
 #endif /* MAIN_H */
