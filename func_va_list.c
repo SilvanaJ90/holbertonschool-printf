@@ -137,11 +137,10 @@ int print_pct(va_list arg)
 int print_u(va_list arg)
 {
 	int j = 1;
-	unsigned int n;
+	unsigned int n = va_arg(arg, unsigned int);
 	unsigned int tem;
 	int last = n % 10, digit, exp = 1;
 
-	n = va_arg(arg, unsigned int);
 	n = n / 10;
 	tem = n;
 
@@ -184,10 +183,9 @@ int print_o(va_list arg)
 {
 	int *a;
 	int j, count;
-	unsigned int n;
+	unsigned int n = va_arg(arg, unsigned int);
 	unsigned int tem = n;
 
-	n = va_arg(arg, unsigned int);
 	count = 0;
 
 	while (n / 8 != 0)
@@ -221,10 +219,9 @@ int print_x(va_list arg)
 {
 	int *a;
 	int j, count;
-	unsigned int n;
+	unsigned int n = va_arg(arg, unsigned int);
 	unsigned int tem = n;
 
-	n = va_arg(arg, unsigned int);
 	count = 0;
 
 	while (n / 16 != 0)
@@ -242,8 +239,8 @@ int print_x(va_list arg)
 	for (j = count - 1; j >= 0; j--)
 	{
 		if (a[j] > 9)
-			a[j] = a[i] + 7;
-			_putchar(a[j] + '0');
+			a[j] = a[j] + 7;
+		_putchar(a[j] + '0');
 	}
 	free(a);
 	return (count);
@@ -260,10 +257,9 @@ int print_X(va_list arg)
 {
 	int *a;
 	int j, count;
-	unsigned int n;
+	unsigned int n = va_arg(arg, unsigned int);
 	unsigned int tem = n;
 
-	n = va_arg(arg, unsigned int);
 	count = 0;
 
 	while (n / 16 != 0)
@@ -281,8 +277,8 @@ int print_X(va_list arg)
 	for (j = count - 1; j >= 0; j--)
 	{
 		if (a[j] > 9)
-			a[j] = a[i] + 7;
-			_putchar(a[j] + '0');
+			a[j] = a[j] + 7;
+		_putchar(a[j] + '0');
 	}
 	free(a);
 	return (count);
