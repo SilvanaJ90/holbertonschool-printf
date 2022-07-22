@@ -12,27 +12,26 @@
 
 int print_b(va_list arg)
 {
-	int count = 0, flag = 0;
-	int j, b, a = 1;
-	unsigned int n = va_arg(arg, unsigned int);
-	unsigned int tem;
+	unsigned int n, m, i, sum;
+	unsigned int a[32];
+	int count;
 
-	for (j = 0; j < 32; j++)
+	n = va_arg(arg, unsigned int);
+	m = 2147483648; /* (2 ^ 31) */
+	a[0] = n / m;
+	for (i = 1; i < 32; i++)
 	{
-		tem = ((a << (31 - j)) & n);
-		if (tem >> (31 - j))
-			flag = 1;
-		if (flag)
+		m /= 2;
+		a[i] = (n / m) % 2;
+	}
+	for (i = 0, sum = 0, count = 0; i < 32; i++)
+	{
+		sum += a[i];
+		if (sum || i == 31)
 		{
-			b = tem >> (31 - j);
-			_putchar(b + 48);
+			_putchar('0' + a[i]);
 			count++;
 		}
-	}
-	if (count == 0)
-	{
-		count++;
-		_putchar('0');
 	}
 	return (count);
 }
