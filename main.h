@@ -28,5 +28,6 @@ int print_o(va_list arg);
 int print_x(va_list arg);
 int print_X(va_list arg);
 int print_S(va_list arg);
+int print_p(va_list arg);
 
 #endif /* MAIN_H */
