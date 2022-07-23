@@ -23,6 +23,12 @@ static int hex_print(char c)
 	return (count);
 }
 
+/**
+ * print_S - check code
+ * @arg: value
+ * Return: count
+ */
+
 int print_S(va_list arg)
 {
 	unsigned int i;
@@ -49,7 +55,7 @@ int print_S(va_list arg)
 	return (count);
 }
 /**
- * _pow
+ * _pow - check code
  * @base: value
  * @exponent
  * Return: count
@@ -65,6 +71,13 @@ static unsigned long _pow(unsigned int base, unsigned int exponent)
 	}
 	return (ans);
 }
+
+/**
+ * _print_p -check code
+ * @p: value
+ * Return: count
+ */
+
 
 int print_p(va_list p)
 {
@@ -109,6 +122,9 @@ int print_p(va_list p)
 	return (count);
 }
 /**
+ * print_r - check code
+ * @arg: value
+ * Return: len
  */
 int print_r(va_list arg)
 {

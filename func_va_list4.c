@@ -2,6 +2,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 /**
+ * print_R
+ * @arg: value
+ * Return: len
  */
 int print_R(va_list arg)
 {
@@ -34,5 +37,5 @@ int print_R(va_list arg)
 	for (i = 0; m[i] != '\0'; i++)
 		write(1, &m[i], 1);
 	free(m);
-	return(len);
+	return (len);
 }
