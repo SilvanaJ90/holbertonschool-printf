@@ -57,7 +57,7 @@ int print_S(va_list arg)
 /**
  * _pow - check code
  * @base: value
- * @exponent
+ * @exponent: value
  * Return: count
  */
 static unsigned long _pow(unsigned int base, unsigned int exponent)
@@ -73,7 +73,7 @@ static unsigned long _pow(unsigned int base, unsigned int exponent)
 }
 
 /**
- * _print_p -check code
+ * print_p -check code
  * @p: value
  * Return: count
  */
