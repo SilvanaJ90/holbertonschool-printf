@@ -14,6 +14,20 @@ typedef struct print
 	int (*k)(va_list);
 } print_a;
 
+/**
+ * struct print - function of variadic list
+ * @j: to print content
+ * @k: print what you get
+ */
+
+typedef struct flag
+{
+	int space;
+	int numeral;
+	int mas;
+} flag_a;
+
+
 int _putchar(char c);
 int _printf(const char *format, ...);
 int aux_func(const char *format, va_list args, print_a *a);
@@ -29,5 +43,7 @@ int print_x(va_list arg);
 int print_X(va_list arg);
 int print_S(va_list arg);
 int print_p(va_list arg);
+int print_flag(char s, flag_a *f);
+
 
 #endif /* MAIN_H */
