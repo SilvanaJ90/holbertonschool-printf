@@ -1,6 +1,9 @@
 #include "main.h"
 #include <unistd.h>
 /**
+ * hex_print - check code
+ * @c: value
+ * Return: count
  */
 static int hex_print(char c)
 {
@@ -46,6 +49,10 @@ int print_S(va_list arg)
 	return (count);
 }
 /**
+ * _pow
+ * @base: value
+ * @exponent
+ * Return: count
  */
 static unsigned long _pow(unsigned int base, unsigned int exponent)
 {
@@ -107,8 +114,8 @@ int print_r(va_list arg)
 {
 	char *vp, res;
 	int i = 0, len = 0;
-	
-	vp= va_arg(arg, char *);
+
+	vp = va_arg(arg, char *);
 	while (vp[i] != '\0')
 	{
 		len++;
